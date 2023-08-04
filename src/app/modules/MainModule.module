@@ -1,0 +1,38 @@
+{
+  "props": {
+    "author": "Ryzhenkov Yevgeny",
+    "version": "1.0.0.0"
+  },
+  "components": {
+    "groups": {
+      "type": "script\\storage\\IniStorage",
+      "x": 160.0,
+      "y": 32.0,
+      "props": {
+        "path": "groups.ini",
+        "autoSave": false,
+        "multiLineValues": "1"
+      }
+    },
+    "cfg": {
+      "type": "script\\storage\\IniStorage",
+      "x": 96,
+      "y": 32,
+      "props": {
+        "path": "config.ini",
+        "autoSave": false,
+        "multiLineValues": "1"
+      }
+    },
+    "persons": {
+      "type": "script\\storage\\IniStorage",
+      "x": 32,
+      "y": 32,
+      "props": {
+        "path": "persons.ini",
+        "autoSave": false,
+        "multiLineValues": "1"
+      }
+    }
+  }
+}

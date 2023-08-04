@@ -1,0 +1,54 @@
+/* JavaFX CSS Style with -fx- prefix */
+
+.mG {
+    -fx-background-color: #c2d23a;
+    -fx-background-radius: 6;
+    -fx-effect: innershadow( gaussian , #9BA82E , 0 , 0 , 0 , -2 );
+}
+.mO {
+    -fx-background-color: #F9A23B;
+    -fx-background-radius: 6;
+    -fx-effect: innershadow( gaussian , #c7812f , 0 , 0 , 0 , -2 );
+}
+.mR {
+    -fx-background-color: #ff6666;
+    -fx-background-radius: 6;
+    -fx-effect: innershadow( gaussian , #b24747 , 0 , 0 , 0 , -2 );
+}
+.greyBg {
+    -fx-background-color: #f3f3f3;
+    -fx-background-radius: 4;
+}
+
+// ScrollPane
+.scroll-pane .viewport {
+    -fx-background-radius: 8 0 0 8;
+}
+.scroll-pane,
+.scroll-pane:hover,
+.scroll-pane:focused {
+    -fx-background-color: transparent;
+    -fx-background-radius:  8;
+}
+.scroll-pane .corner { -fx-background-color: transparent; }
+.scroll-bar .decrement-button, .scroll-bar .decrement-arrow,
+.scroll-bar .increment-button, .scroll-bar .increment-arrow {
+    visibility: hidden;
+    -fx-pref-width: 16;
+}
+.scroll-bar:vertical {
+    -fx-background-color: #F4F4F4;
+    -fx-border-style: solid;
+    -fx-border-color: #F4F4F4;
+    -fx-border-radius: 0 8 8 0;
+    -fx-background-radius: 0 8 8 0;
+}
+.scroll-bar:vertical .thumb {
+    -fx-background-radius: 8;
+}
+
+// ListView
+.list-view, .list-view:focused {
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}

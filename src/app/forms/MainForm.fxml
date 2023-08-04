@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?import javafx.scene.*?><?import javafx.collections.*?><?import javafx.scene.layout.*?><?import javafx.scene.control.*?><?import javafx.scene.text.*?><?import javafx.scene.image.*?><?import javafx.scene.shape.*?><?import javafx.scene.paint.*?><?import javafx.scene.web.*?><?import javafx.geometry.*?><?import java.lang.*?><?import org.develnext.jphp.ext.javafx.classes.data.*?><?import org.develnext.jphp.ext.javafx.support.*?><?import org.develnext.jphp.ext.javafx.support.control.*?><?import org.develnext.jphp.ext.game.support.*?><AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" focusTraversable="false" id="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480" prefWidth="640" styleClass="">
+  <children>
+    <LabelEx AnchorPane.leftAnchor="16" AnchorPane.rightAnchor="16" AnchorPane.topAnchor="16" alignment="CENTER_LEFT" autoSize="false" contentDisplay="LEFT" ellipsisString="..." focusTraversable="false" graphicTextGap="8" id="mainTitle" layoutX="16" layoutY="16" prefHeight="30" prefWidth="608" styleClass="label " text="School Portal Marks Viewer by Ryzhenkov Yevgeny" textAlignment="LEFT" underline="false" wrapText="false">
+      <font>
+        <Font name="System Regular" size="20"/>
+      </font>
+    </LabelEx>
+    <Data cursor="DEFAULT" enabled="1" graphic=".data/img/logo.png" id="data-mainTitle" visible="1"/>
+    <Panel AnchorPane.bottomAnchor="16" AnchorPane.leftAnchor="16" AnchorPane.rightAnchor="16" AnchorPane.topAnchor="64" backgroundColor="#ffffff" borderColor="#c0c0c0" borderRadius="8" borderStyle="NONE" borderWidth="0" focusTraversable="false" id="panel" layoutX="16" layoutY="64" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="400" prefWidth="608" styleClass="" titleColor="#333333" titleOffset="15" titlePosition="TOP_LEFT">
+      <children>
+        <LabelEx AnchorPane.leftAnchor="16" AnchorPane.rightAnchor="16" AnchorPane.topAnchor="16" alignment="CENTER_LEFT" autoSize="false" contentDisplay="LEFT" ellipsisString="..." focusTraversable="false" graphicTextGap="4" id="toolTitle" layoutX="16" layoutY="16" prefHeight="25" prefWidth="576" styleClass="label " text="Инструменты" textAlignment="LEFT" underline="false" wrapText="false">
+          <font>
+            <Font name="System Regular" size="20"/>
+          </font>
+        </LabelEx>
+        <Data cursor="DEFAULT" enabled="1" id="data-toolTitle" visible="1"/>
+        <ScrollPane focusTraversable="false" hbarPolicy="NEVER" hvalue="0" id="container" layoutX="16" layoutY="64" prefHeight="320" prefWidth="576" styleClass="scroll-pane " vbarPolicy="ALWAYS" vvalue="0">
+          <content>
+            <AnchorPane focusTraversable="false" id="" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="409" prefWidth="544" styleClass="">
+              <children>
+                <Panel backgroundColor="#ffffff" borderColor="#c0c0c0" borderRadius="8" borderStyle="NONE" borderWidth="0" focusTraversable="false" id="panelAlt" layoutX="16" layoutY="16" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="120" prefWidth="528" styleClass="" titleColor="#333333" titleOffset="15" titlePosition="TOP_LEFT">
+                  <children>
+                    <LabelEx AnchorPane.leftAnchor="16" AnchorPane.rightAnchor="16" AnchorPane.topAnchor="16" alignment="CENTER_LEFT" autoSize="false" contentDisplay="LEFT" ellipsisString="..." focusTraversable="false" graphicTextGap="4" id="label" layoutX="16" layoutY="16" prefHeight="25" prefWidth="576" styleClass="label " text="Оценки ученика за период" textAlignment="LEFT" underline="false" wrapText="false">
+                      <font>
+                        <Font name="System Regular" size="20"/>
+                      </font>
+                    </LabelEx>
+                    <Data cursor="DEFAULT" enabled="1" graphic=".data/img/person.png" id="data-label" visible="1"/>
+                    <LabelEx AnchorPane.leftAnchor="16" AnchorPane.rightAnchor="16.453125" AnchorPane.topAnchor="48" alignment="TOP_LEFT" autoSize="false" contentDisplay="LEFT" ellipsisString="..." focusTraversable="false" graphicTextGap="4" id="labelAlt" layoutX="16" layoutY="48" prefHeight="56" prefWidth="496" styleClass="label " text="С помощью этого инструмента можно смотреть оценки ученика за определённый период" textAlignment="LEFT" textFill="#808080" underline="false" wrapText="true">
+                      <font>
+                        <Font name="System Regular" size="16"/>
+                      </font>
+                    </LabelEx>
+                    <Data cursor="DEFAULT" enabled="1" graphic="" id="data-labelAlt" visible="1"/>
+                  </children>
+                  <titleFont>
+                    <Font name="System Regular" size="12"/>
+                  </titleFont>
+                </Panel>
+                <Data cursor="HAND" enabled="1" id="data-panelAlt" visible="1"/>
+                <Panel backgroundColor="#ffffff" borderColor="#c0c0c0" borderRadius="8" borderStyle="NONE" borderWidth="0" focusTraversable="false" id="panel3" layoutX="16" layoutY="144" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="120" prefWidth="528" styleClass="" titleColor="#333333" titleOffset="15" titlePosition="TOP_LEFT">
+                  <children>
+                    <LabelEx AnchorPane.leftAnchor="16" AnchorPane.rightAnchor="16" AnchorPane.topAnchor="16" alignment="CENTER_LEFT" autoSize="false" contentDisplay="LEFT" ellipsisString="..." focusTraversable="false" graphicTextGap="4" id="label3" layoutX="16" layoutY="16" prefHeight="25" prefWidth="576" styleClass="label " text="Оценки группы учеников за период" textAlignment="LEFT" underline="false" wrapText="false">
+                      <font>
+                        <Font name="System Regular" size="20"/>
+                      </font>
+                    </LabelEx>
+                    <LabelEx AnchorPane.leftAnchor="16" AnchorPane.rightAnchor="16.453125" AnchorPane.topAnchor="48" alignment="TOP_LEFT" autoSize="false" contentDisplay="LEFT" ellipsisString="..." focusTraversable="false" graphicTextGap="4" id="label4" layoutX="16" layoutY="48" prefHeight="56" prefWidth="496" styleClass="label " text="С помощью этого инструмента можно смотреть оценки группы учеников за определённый период" textAlignment="LEFT" textFill="#808080" underline="false" wrapText="true">
+                      <font>
+                        <Font name="System Regular" size="16"/>
+                      </font>
+                    </LabelEx>
+                    <Data cursor="DEFAULT" enabled="1" graphic=".data/img/persons.png" id="data-label3" visible="1"/>
+                    <Data cursor="DEFAULT" enabled="1" graphic="" id="data-label4" visible="1"/>
+                  </children>
+                  <titleFont>
+                    <Font name="System Regular" size="12"/>
+                  </titleFont>
+                </Panel>
+                <Data cursor="HAND" enabled="1" id="data-panel3" visible="1"/>
+                <Panel backgroundColor="#ffffff" borderColor="#c0c0c0" borderRadius="8" borderStyle="NONE" borderWidth="0" focusTraversable="false" id="panel4" layoutX="16" layoutY="272" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="120" prefWidth="528" styleClass="" titleColor="#333333" titleOffset="15" titlePosition="TOP_LEFT">
+                  <children>
+                    <LabelEx AnchorPane.leftAnchor="16" AnchorPane.rightAnchor="16" AnchorPane.topAnchor="16" alignment="CENTER_LEFT" autoSize="false" contentDisplay="LEFT" ellipsisString="..." focusTraversable="false" graphicTextGap="4" id="label5" layoutX="16" layoutY="16" prefHeight="25" prefWidth="576" styleClass="label " text="Настройки" textAlignment="LEFT" underline="false" wrapText="false">
+                      <font>
+                        <Font name="System Regular" size="20"/>
+                      </font>
+                    </LabelEx>
+                    <LabelEx AnchorPane.leftAnchor="16" AnchorPane.rightAnchor="16.453125" AnchorPane.topAnchor="48" alignment="TOP_LEFT" autoSize="false" contentDisplay="LEFT" ellipsisString="..." focusTraversable="false" graphicTextGap="4" id="label6" layoutX="16" layoutY="48" prefHeight="56" prefWidth="496" styleClass="label " text="Настройки приложения" textAlignment="LEFT" textFill="#808080" underline="false" wrapText="true">
+                      <font>
+                        <Font name="System Regular" size="16"/>
+                      </font>
+                    </LabelEx>
+                    <Data cursor="DEFAULT" enabled="1" graphic=".data/img/settings.png" id="data-label5" visible="1"/>
+                    <Data cursor="DEFAULT" enabled="1" graphic="" id="data-label6" visible="1"/>
+                  </children>
+                  <titleFont>
+                    <Font name="System Regular" size="12"/>
+                  </titleFont>
+                </Panel>
+                <Data cursor="HAND" enabled="1" id="data-panel4" visible="1"/>
+                <LabelEx alignment="CENTER_LEFT" autoSize="false" contentDisplay="LEFT" ellipsisString="..." focusTraversable="false" graphicTextGap="4" id="label7" layoutX="16" layoutY="392" prefHeight="17" prefWidth="528" styleClass="label " text="" textAlignment="LEFT" underline="false" wrapText="false">
+                  <font>
+                    <Font name="System Regular" size="12"/>
+                  </font>
+                </LabelEx>
+                <Data cursor="DEFAULT" enabled="1" id="data-label7" visible="1"/>
+              </children>
+            </AnchorPane>
+          </content>
+        </ScrollPane>
+        <Data cursor="DEFAULT" enabled="1" id="data-container" visible="1"/>
+      </children>
+      <titleFont>
+        <Font name="System Regular" size="12"/>
+      </titleFont>
+    </Panel>
+    <Data cursor="DEFAULT" enabled="1" id="data-panel" visible="1"/>
+  </children>
+</AnchorPane>

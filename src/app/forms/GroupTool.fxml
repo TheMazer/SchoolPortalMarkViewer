@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?import javafx.scene.*?><?import javafx.collections.*?><?import javafx.scene.layout.*?><?import javafx.scene.control.*?><?import javafx.scene.text.*?><?import javafx.scene.image.*?><?import javafx.scene.shape.*?><?import javafx.scene.paint.*?><?import javafx.scene.web.*?><?import javafx.geometry.*?><?import java.lang.*?><?import org.develnext.jphp.ext.javafx.classes.data.*?><?import org.develnext.jphp.ext.javafx.support.*?><?import org.develnext.jphp.ext.javafx.support.control.*?><?import org.develnext.jphp.ext.game.support.*?><AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" focusTraversable="false" id="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480" prefWidth="640" styleClass="">
+  <children>
+    <LabelEx AnchorPane.leftAnchor="16" AnchorPane.rightAnchor="16" AnchorPane.topAnchor="16" alignment="CENTER_LEFT" autoSize="false" contentDisplay="LEFT" ellipsisString="..." focusTraversable="false" graphicTextGap="8" id="mainTitle" layoutX="16" layoutY="16" prefHeight="30" prefWidth="608" styleClass="label " text="School Portal Marks Viewer by Ryzhenkov Yevgeny" textAlignment="LEFT" underline="false" wrapText="false">
+      <font>
+        <Font name="System Regular" size="20"/>
+      </font>
+    </LabelEx>
+    <Data cursor="DEFAULT" enabled="1" graphic=".data/img/logo.png" id="data-mainTitle" visible="1"/>
+    <Panel AnchorPane.bottomAnchor="16" AnchorPane.leftAnchor="16" AnchorPane.rightAnchor="16" AnchorPane.topAnchor="64" backgroundColor="#ffffff" borderColor="#c0c0c0" borderRadius="8" borderStyle="NONE" borderWidth="0" focusTraversable="false" id="panel" layoutX="16" layoutY="64" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" prefHeight="400" prefWidth="608" styleClass="" titleColor="#333333" titleOffset="15" titlePosition="TOP_LEFT">
+      <children>
+        <LabelEx AnchorPane.leftAnchor="16" AnchorPane.rightAnchor="16" AnchorPane.topAnchor="16" alignment="CENTER_LEFT" autoSize="false" contentDisplay="LEFT" ellipsisString="..." focusTraversable="false" graphicTextGap="4" id="toolTitle" layoutX="16" layoutY="16" prefHeight="25" prefWidth="576" styleClass="label " text="Кол-во оценок группы учеников за период" textAlignment="LEFT" underline="false" wrapText="false">
+          <font>
+            <Font name="System Regular" size="20"/>
+          </font>
+        </LabelEx>
+        <Data cursor="DEFAULT" enabled="1" id="data-toolTitle" visible="1"/>
+        <Hyperlink AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="16" alignment="CENTER_LEFT" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="link" layoutX="16" layoutY="360" prefHeight="20" prefWidth="136" styleClass="hyperlink " text="« Другой инструмент" textAlignment="LEFT" wrapText="false">
+          <font>
+            <Font name="System Regular" size="14"/>
+          </font>
+        </Hyperlink>
+        <Data cursor="HAND" enabled="1" id="data-link" visible="1"/>
+        <Button AnchorPane.bottomAnchor="15" AnchorPane.rightAnchor="16" alignment="CENTER" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="getMarksPeriod" layoutX="344" layoutY="345" prefHeight="40" prefWidth="248" styleClass="button " text="Получить оценки за период" textAlignment="CENTER" underline="false" wrapText="false">
+          <font>
+            <Font name="System Regular" size="14"/>
+          </font>
+        </Button>
+        <Data cursor="HAND" enabled="1" id="data-getMarksPeriod" visible="1"/>
+        <ListViewEx AnchorPane.bottomAnchor="72" AnchorPane.leftAnchor="16" AnchorPane.rightAnchor="16" AnchorPane.topAnchor="128" editable="false" fixedCellSize="-1" focusTraversable="true" id="listView" layoutX="16" layoutY="128" prefHeight="200" prefWidth="576" styleClass="list-view ">
+          <items xmlns:fx="http://javafx.com/fxml">
+            <FXCollections fx:factory="observableArrayList"/>
+          </items>
+        </ListViewEx>
+        <Data cursor="DEFAULT" enabled="1" id="data-listView" visible="1"/>
+        <ComboBox editable="false" focusTraversable="true" id="groupChoose" layoutX="80" layoutY="56" prefHeight="24" prefWidth="144" promptText="" styleClass="combo-box-base combo-box " value="" visibleRowCount="10">
+          <items xmlns:fx="http://javafx.com/fxml">
+            <FXCollections fx:factory="observableArrayList"/>
+          </items>
+        </ComboBox>
+        <Data cursor="HAND" enabled="1" id="data-groupChoose" visible="1"/>
+        <LabelEx AnchorPane.leftAnchor="16" AnchorPane.topAnchor="56" alignment="CENTER_LEFT" autoSize="false" contentDisplay="LEFT" ellipsisString="..." focusTraversable="false" graphicTextGap="4" id="personLabel" layoutX="16" layoutY="56" prefHeight="25" prefWidth="56" styleClass="label " text="Группа:" textAlignment="LEFT" underline="false" wrapText="false">
+          <font>
+            <Font name="System Regular" size="16"/>
+          </font>
+        </LabelEx>
+        <Data cursor="DEFAULT" enabled="1" id="data-personLabel" visible="1"/>
+        <LabelEx AnchorPane.leftAnchor="16" AnchorPane.topAnchor="88" alignment="CENTER_LEFT" autoSize="false" contentDisplay="LEFT" ellipsisString="..." focusTraversable="false" graphicTextGap="4" id="periodLabel" layoutX="16" layoutY="88" prefHeight="25" prefWidth="88" styleClass="label " text="За период c" textAlignment="LEFT" underline="false" wrapText="false">
+          <font>
+            <Font name="System Regular" size="16"/>
+          </font>
+        </LabelEx>
+        <Data cursor="DEFAULT" enabled="1" id="data-periodLabel" visible="1"/>
+        <DatePicker editable="true" focusTraversable="true" id="periodFrom" layoutX="112" layoutY="88" prefHeight="24" prefWidth="144" promptText="YYYY-MM-DD" showWeekNumbers="false">
+          <styleClass xmlns:fx="http://javafx.com/fxml">
+            <String fx:value="combo-box-base"/>
+            <String fx:value="date-picker"/>
+          </styleClass>
+        </DatePicker>
+        <Data cursor="HAND" enabled="1" format="yyyy-MM-dd" id="data-periodFrom" value="" visible="1"/>
+        <LabelEx alignment="CENTER" autoSize="false" contentDisplay="LEFT" ellipsisString="..." focusTraversable="false" graphicTextGap="4" id="periodLabel2" layoutX="264" layoutY="88" prefHeight="25" prefWidth="20" styleClass="label " text="по" textAlignment="LEFT" underline="false" wrapText="false">
+          <font>
+            <Font name="System Regular" size="16"/>
+          </font>
+        </LabelEx>
+        <Data cursor="DEFAULT" enabled="1" id="data-periodLabel2" visible="1"/>
+        <DatePicker editable="true" focusTraversable="true" id="periodTo" layoutX="288" layoutY="88" prefHeight="24" prefWidth="144" promptText="YYYY-MM-DD" showWeekNumbers="false">
+          <styleClass xmlns:fx="http://javafx.com/fxml">
+            <String fx:value="combo-box-base"/>
+            <String fx:value="date-picker"/>
+          </styleClass>
+        </DatePicker>
+        <Data cursor="HAND" enabled="1" format="yyyy-MM-dd" id="data-periodTo" value="" visible="1"/>
+        <RadioGroupPane alignment="TOP_LEFT" focusTraversable="false" id="methodSelect" layoutX="448" layoutY="72" maxHeight="-1" maxWidth="-1" minHeight="-1" minWidth="-1" orientation="VERTICAL" prefHeight="39" prefWidth="120" selectedIndex="0" spacing="5" styleClass="" textColor="#000000">
+          <children/>
+          <font>
+            <Font name="System Regular" size="12"/>
+          </font>
+          <items xmlns:fx="http://javafx.com/fxml">
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="По ID школы"/>
+              <String fx:value="По ID уч. группы"/>
+            </FXCollections>
+          </items>
+        </RadioGroupPane>
+        <Data cursor="DEFAULT" enabled="1" id="data-methodSelect" visible="1"/>
+      </children>
+      <titleFont>
+        <Font name="System Regular" size="12"/>
+      </titleFont>
+    </Panel>
+    <Data cursor="DEFAULT" enabled="1" id="data-panel" visible="1"/>
+  </children>
+</AnchorPane>
