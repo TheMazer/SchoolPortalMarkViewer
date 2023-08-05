@@ -52,3 +52,7 @@
     -fx-border-radius: 8;
     -fx-background-radius: 8;
 }
+.list-cell {
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}

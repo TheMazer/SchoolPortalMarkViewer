@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project author="Евгений" authorOS="Windows 10" createdAt="1684505587580" ideName="DevelNext" ideVersion="16.7.0" ideVersionHash="2017103112" name="GetSPMarks" packageName="app" template="ide\project\templates\DefaultGuiProjectTemplate" updatedAt="1691168964596">
+<project author="Евгений" authorOS="Windows 10" createdAt="1684505587580" ideName="DevelNext" ideVersion="16.7.0" ideVersionHash="2017103112" name="GetSPMarks" packageName="app" template="ide\project\templates\DefaultGuiProjectTemplate" updatedAt="1691230809758">
   <tree>
     <expanded>
     <path src=""/>
@@ -17,6 +17,7 @@
     <file src="src/app/forms/PersonTool.php"/>
     <file selected="1" src="src/app/forms/GroupTool.php"/>
     <file src="src/app/forms/MarksCount.php"/>
+    <file src="src/app/forms/Settings.php"/>
     <file src="persons.ini"/>
   </openedFiles>
   <files/>

@@ -4,23 +4,23 @@
     "version": "1.0.0.0"
   },
   "components": {
-    "groups": {
-      "type": "script\\storage\\IniStorage",
-      "x": 160.0,
-      "y": 32.0,
-      "props": {
-        "path": "groups.ini",
-        "autoSave": false,
-        "multiLineValues": "1"
-      }
-    },
     "cfg": {
       "type": "script\\storage\\IniStorage",
       "x": 96,
       "y": 32,
       "props": {
         "path": "config.ini",
-        "autoSave": false,
+        "autoSave": true,
+        "multiLineValues": "1"
+      }
+    },
+    "groups": {
+      "type": "script\\storage\\IniStorage",
+      "x": 160,
+      "y": 32,
+      "props": {
+        "path": "groups.ini",
+        "autoSave": true,
         "multiLineValues": "1"
       }
     },
@@ -30,7 +30,7 @@
       "y": 32,
       "props": {
         "path": "persons.ini",
-        "autoSave": false,
+        "autoSave": true,
         "multiLineValues": "1"
       }
     }

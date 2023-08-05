@@ -45,8 +45,17 @@ class GroupTool extends AbstractForm
         $method = $this->methodSelect->selectedIndex;
         $showAbsent = $this->showAbsent->selected;
         
+        try {
+            foreach (explode("\n", file_get_contents()) as $line) {
+                $bypasslist[] = explode(':', $line); // [ ['id', 'mF', 'mF', 'mT', 'mT', 'notListedIfAbsent'], [...] ]
+            }
+            
+        } catch (Exception $e) {
+            Logger::warn("Can't get bypass list!");
+            $bypasslist = [];
+        }
         
-        $thread = new Thread(function() use ($groupIDs, $masterToken, $schoolID, $eduGroupIDs, $method, $showAbsent) {
+        $thread = new Thread(function() use ($groupIDs, $masterToken, $schoolID, $eduGroupIDs, $method, $showAbsent, $bypasslist) {
         
             $lists = [];
         
@@ -201,16 +210,16 @@ class GroupTool extends AbstractForm
     
         if ($mTwo > 0) {
             $image = 'bad';
-            $bg = '#FFB7B7';
+            //$bg = '#FFB7B7';
         } elseif ($mThree > 0) {
             $image = 'normal';
-            $bg = '#FCD3A2';
+            //$bg = '#FCD3A2';
         } else {
             $image = 'good';
         }
-        if (!$this->cfg->get('sellHighlightByMark')) { $bg = null; }
+        //if (!$this->cfg->get('sellHighlightByMark')) { $bg = null; }
         
-        $this->listView->items->add([$name, $class, self::setImage($image), $mFive, $mFour, $mThree, $mTwo, $bg]);
+        $this->listView->items->add([$name, $class, self::setImage($image), $mFive, $mFour, $mThree, $mTwo]);
     }
 
     /**
@@ -218,6 +227,7 @@ class GroupTool extends AbstractForm
      */
     function doShow(UXWindowEvent $e = null)
     {    
+        $this->cfg->load();
         $this->groupChoose->items->setAll($this->groups->sections());
         $this->groupChoose->selectedIndex = 0;
         
@@ -365,9 +375,6 @@ class GroupTool extends AbstractForm
                 }
                 $cell->text = null;
                 $cell->graphic = $line;
-                if (isset($item[7])) {
-                    $cell->backgroundColor = $item[7];
-                }
             }
         });
         
