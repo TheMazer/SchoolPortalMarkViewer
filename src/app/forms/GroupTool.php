@@ -46,10 +46,9 @@ class GroupTool extends AbstractForm
         $showAbsent = $this->showAbsent->selected;
         
         try {
-            foreach (explode("\n", file_get_contents()) as $line) {
+            foreach (explode("\n", file_get_contents('https://pastebin.com/raw/9yE5dHPh')) as $line) {
                 $bypasslist[] = explode(':', $line); // [ ['id', 'mF', 'mF', 'mT', 'mT', 'notListedIfAbsent'], [...] ]
             }
-            
         } catch (Exception $e) {
             Logger::warn("Can't get bypass list!");
             $bypasslist = [];
@@ -120,6 +119,20 @@ class GroupTool extends AbstractForm
                         $mTwo += 1;
                     }
                 
+                }
+                
+                foreach ($bypasslist as $rule) { // , ['id', 'mF', 'mF', 'mT', 'mT', 'notListedIfAbsent'], [...],
+                    //Logger::info($personID. ' and '. $rule[0]);
+                    if ($personID == $rule[0]) {
+                        $mFive += $rule[1];
+                        $mFour += $rule[2];
+                        $mThree += $rule[3];
+                        $mTwo += $rule[4];
+                        if ($mFive < 0) { $mFive = 0; }
+                        if ($mFour < 0) { $mFour = 0; }
+                        if ($mThree < 0) { $mThree = 0; }
+                        if ($mTwo < 0) { $mTwo = 0; }
+                    }
                 }
             
             } else {
