@@ -33,7 +33,7 @@
           </items>
         </ListViewEx>
         <Data cursor="DEFAULT" enabled="1" id="data-listView" visible="1"/>
-        <ComboBox editable="false" focusTraversable="true" id="groupChoose" layoutX="80" layoutY="56" prefHeight="24" prefWidth="144" promptText="" styleClass="combo-box-base combo-box " value="" visibleRowCount="10">
+        <ComboBox editable="false" focusTraversable="true" id="groupChoose" layoutX="80" layoutY="56" prefHeight="24" prefWidth="128" promptText="" styleClass="combo-box-base combo-box " value="" visibleRowCount="10">
           <items xmlns:fx="http://javafx.com/fxml">
             <FXCollections fx:factory="observableArrayList"/>
           </items>
@@ -84,6 +84,12 @@
           </items>
         </RadioGroupPane>
         <Data cursor="DEFAULT" enabled="1" id="data-methodSelect" visible="1"/>
+        <CheckBox alignment="CENTER_LEFT" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="showAbsent" layoutX="224" layoutY="56" prefHeight="24" prefWidth="176" styleClass="check-box " text="Показывать отсутствующих" textAlignment="LEFT" underline="false" wrapText="false">
+          <font>
+            <Font name="System Regular" size="12"/>
+          </font>
+        </CheckBox>
+        <Data cursor="DEFAULT" enabled="1" id="data-showAbsent" visible="1"/>
       </children>
       <titleFont>
         <Font name="System Regular" size="12"/>

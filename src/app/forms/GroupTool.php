@@ -43,9 +43,10 @@ class GroupTool extends AbstractForm
             '2000002158829' => '1953235842757792830'  // Suslik
         ];
         $method = $this->methodSelect->selectedIndex;
+        $showAbsent = $this->showAbsent->selected;
         
         
-        $thread = new Thread(function() use ($groupIDs, $masterToken, $schoolID, $eduGroupIDs, $method) {
+        $thread = new Thread(function() use ($groupIDs, $masterToken, $schoolID, $eduGroupIDs, $method, $showAbsent) {
         
             $lists = [];
         
@@ -56,13 +57,12 @@ class GroupTool extends AbstractForm
             
             $badName = true;
             $badAttempts = 0;
-            while ($badName and $badAttempts < 10) {
+            while ($badName and $badAttempts < 7) {
                 var_dump('Getting name for '. $personID. '...');
                 $result = json_decode(curl_exec($ch), true);
-                if ($result) { $badName = false; } else { Logger::warn("Can't get name for ". $personID. ", retrying..."); }
-                $badAttempts++;
+                if ($result) { $badName = false; } else { Logger::warn("Can't get name for ". $personID. ", retrying..."); $badAttempts++; }
             }
-            if ($badAttempts < 10) { $name = $result['shortName']. '.'; } else { $name = 'bad'; }
+            if ($badAttempts < 7) { $name = $result['shortName']. '.'; } else { $name = '–'; }
             
             $ch = curl_init('https://api.school.mosreg.ru/v2/persons/'. $personID. '/edu-groups');
             curl_setopt($ch, CURLOPT_HTTPHEADER, ['accept: application/json', 'Access-Token: '. $masterToken]);
@@ -70,13 +70,12 @@ class GroupTool extends AbstractForm
             
             $badClass = true;
             $badAttempts = 0;
-            while ($badClass and $badAttempts < 10) {
+            while ($badClass and $badAttempts < 7) {
                 var_dump('Getting class for '. $personID. '...');
                 $result = json_decode(curl_exec($ch), true);
-                if ($result) { $badClass = false; } else { Logger::warn("Can't get class for ". $personID. ", retrying..."); }
-                $badAttempts++;
+                if ($result) { $badClass = false; } else { Logger::warn("Can't get class for ". $personID. ", retrying..."); $badAttempts++; }
             }
-            if ($badAttempts < 10) { $class = $result[1]['name']; } else { $class = 'bad'; }
+            if ($badAttempts < 7) { $class = $result[1]['name']; } else { $class = '–'; }
             
             if ($method == 0) {
                 $url = 'http://api.school.mosreg.ru/v2/persons/'. $personID. '/schools/'. $schoolID .'/marks/'.
@@ -91,13 +90,12 @@ class GroupTool extends AbstractForm
             
             $badMarks = true;
             $badAttempts = 0;
-            while ($badMarks and $badAttempts < 10) {
+            while ($badMarks and $badAttempts < 7) {
                 var_dump('Getting marks for '. $personID. ': '. $url. "\n");
                 $result = json_decode(curl_exec($ch), true);
-                if ($result) { $badMarks = false; } else { Logger::warn("Can't get marks for ". $personID. ", retrying..."); }
-                $badAttempts++;
+                if ($result) { $badMarks = false; } else { Logger::warn("Can't get marks for ". $personID. ", retrying..."); $badAttempts++; }
             }
-            if ($badAttempts < 10) {
+            if ($badAttempts < 7) {
             
                 $mFive = 0; $mFour = 0; $mThree = 0; $mTwo = 0;
                 foreach ($result as $markData) {
@@ -115,7 +113,40 @@ class GroupTool extends AbstractForm
                 
                 }
             
-            } else { $mFive = $mFour = $mThree = $mTwo = 'bad'; }
+            } else {
+                // В этом блоке просто было: $mFive = $mFour = $mThree = $mTwo = '–';
+                $ch = curl_init('https://api.school.mosreg.ru/v2/persons/'. $personID. '/lesson-log-entries?startDate='.
+                $this->periodFrom->value. '&endDate='. $this->periodTo->value);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, ['accept: application/json', 'Access-Token: '. $masterToken]);
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1);
+                
+                $badStatus = true;
+                $badAttempts = 0;
+                while ($badStatus and $badAttempts < 3) {
+                    var_dump('Getting status for '. $personID. '...');
+                    $result = json_decode(curl_exec($ch), true);
+                    if ($result) { $badStatus = false; } else { Logger::warn("Can't get status for ". $personID. ", retrying..."); $badAttempts++; }
+                }
+                if ($badAttempts < 3) {
+                    
+                    $skipped = false;
+                    foreach ($result['logEntries'] as $status) {
+                        if ($status['status'] == 'Pass' or $status['status'] == 'Ill') {
+                            $skipped = true;
+                        }
+                    }
+                    
+                    if ($skipped) {
+                        $mFive = $mFour = $mThree = $mTwo = '–'; // In case of ill or pass
+                    } else {
+                        $mFive = $mFour = $mThree = $mTwo = 0;
+                    }
+                    
+                } else {
+                    $mFive = $mFour = $mThree = $mTwo = '–';
+                }
+            
+            }
             
             
             $lists[] = [$name, $class, $mFive, $mFour, $mThree, $mTwo];
@@ -125,17 +156,24 @@ class GroupTool extends AbstractForm
             
             }
     
-            uiLater(function () use ($lists) {
-                $badList = false;
+            uiLater(function () use ($lists, $groupIDs, $showAbsent) {
+                $badList = 0;
             
                 foreach ($lists as $listItem) {
-                    $this->markListAdd($listItem[0], $listItem[1], $listItem[2], $listItem[3], $listItem[4], $listItem[5]);
-                    if ($listItem[0] == 'bad' or $listItem[1] == 'bad' or ( $listItem[2] == 'bad' and
-                        $listItem[3] == 'bad' and $listItem[4] == 'bad' and $listItem[5] == 'bad' )) { $badList = true; }
+                    if (!(strval($listItem[0]) == '–' or strval($listItem[1]) == '–' or ( strval($listItem[2]) == '–' and
+                        strval($listItem[3]) == '–' and strval($listItem[4]) == '–' and strval($listItem[5]) == '–')) or $showAbsent) {
+                            $this->markListAdd($listItem[0], $listItem[1], $listItem[2], $listItem[3], $listItem[4], $listItem[5]);
+                    }
+                    
+                    if (strval($listItem[0]) == '–' or strval($listItem[1]) == '–' or ( strval($listItem[2]) == '–' and
+                        strval($listItem[3]) == '–' and strval($listItem[4]) == '–' and strval($listItem[5]) == '–' )) { $badList++; }
                 }
                 
-                if ($badList) {
-                    $this->toast("Не удалось загрузить данные некоторых пользователей!\nВозможно проблемы с интернетом,\nили на Школьном портале ведутся тех. работы");
+                if ($badList >= count($groupIDs)) {
+                    $this->toast("Не удалось загрузить данные учеников!\n".
+                    "Виной этому могут быть следующие причины:\n".
+                    "1) Отсутствует интернет-соединение\n".
+                    "2) На школьном портале ведуться тех. работы");
                 }
             
                 $this->hidePreloader();
@@ -184,6 +222,7 @@ class GroupTool extends AbstractForm
         $this->groupChoose->selectedIndex = 0;
         
         $this->listView->items->clear();
+        $this->listView->fixedCellSize = 60;
         
         $this->listView->setCellFactory(function(UXListCell $cell, $item) {
             if ($item) {              
@@ -193,6 +232,9 @@ class GroupTool extends AbstractForm
              
                 $titleDescription = new UXLabel($item[1]);
                 $titleDescription->style = '-fx-text-fill: gray; -fx-font-size: 14;';
+                if (strval($item[3]) == '–' and strval($item[4]) == '–' and strval($item[5]) == '–' and strval($item[6]) == '–') {
+                    $titleDescription->text = $titleDescription->text. ', отсутствовал';
+                }
              
                 $title = new UXVBox([$titleName, $titleDescription]);
                 $title->spacing = -5;
@@ -215,7 +257,7 @@ class GroupTool extends AbstractForm
                 $fiveContainer->spacing = 0; // Between logo and text
                 $fiveContainer->padding = 0; // Sell insets
                 $fiveContainer->alignment = 'CENTER_LEFT';
-                if (!$item[3]) {
+                if ($item[3] == 0 or $item[3] == '–') {
                     $fiveContainer->opacity = 0.3;
                 }
                 
@@ -237,7 +279,7 @@ class GroupTool extends AbstractForm
                 $fourContainer->spacing = 0; // Between logo and text
                 $fourContainer->padding = 0; // Sell insets
                 $fourContainer->alignment = 'CENTER_LEFT';
-                if (!$item[4]) {
+                if ($item[4] == 0 or $item[4] == '–') {
                     $fourContainer->opacity = 0.3;
                 }
                 
@@ -259,7 +301,7 @@ class GroupTool extends AbstractForm
                 $threeContainer->spacing = 0; // Between logo and text
                 $threeContainer->padding = 0; // Sell insets
                 $threeContainer->alignment = 'CENTER_LEFT';
-                if (!$item[5]) {
+                if ($item[5] == 0 or $item[5] == '–') {
                     $threeContainer->opacity = 0.3;
                 }
                 
@@ -281,19 +323,19 @@ class GroupTool extends AbstractForm
                 $twoContainer->spacing = 0; // Between logo and text
                 $twoContainer->padding = 0; // Sell insets
                 $twoContainer->alignment = 'CENTER_LEFT';
-                if (!$item[6]) {
+                if ($item[6] == 0 or $item[6] == '–') {
                     $twoContainer->opacity = 0.3;
                 }
                 
                 // POINTS CONTAINER
-                $add = new UXLabel( $item[3] );
+                $add = new UXLabel( $item[3]*1 );
                 $add->classesString = 'greyBg';
                 $add->size = [32, 20];
                 $add->alignment = 'CENTER';
                 $add->textColor = '#9ba82e';
                 $add->font->bold = true;
                 $add->font->size = 14;
-                if (!$item[3]) {
+                if ($add->text == '0') {
                     $add->opacity = 0.3;
                 }
                 
@@ -304,7 +346,7 @@ class GroupTool extends AbstractForm
                 $remove->textColor = '#b24747';
                 $remove->font->bold = true;
                 $remove->font->size = 14;
-                if (!$item[6]) {
+                if ($remove->text == '0') {
                     $remove->opacity = 0.3;
                 }
                 
@@ -318,6 +360,9 @@ class GroupTool extends AbstractForm
                 $line->spacing = 10; // Between logo and text
                 $line->padding = 5; // Sell insets
                 $line->alignment = 'CENTER_LEFT';
+                if (strval($item[3]) == '–' and strval($item[4]) == '–' and strval($item[5]) == '–' and strval($item[6]) == '–') {
+                    $line->opacity = 0.3;
+                }
                 $cell->text = null;
                 $cell->graphic = $line;
                 if (isset($item[7])) {
